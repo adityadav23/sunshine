@@ -7,6 +7,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.android.sunshine.data.SunshinePreferences;
@@ -18,6 +20,8 @@ import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
     private TextView mWeatherTextView;
+    private TextView mErrorTextView;
+    private ProgressBar mLoadingIndicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,22 +33,36 @@ public class MainActivity extends AppCompatActivity {
          * do things like set the text of the TextView.
          */
         mWeatherTextView = (TextView) findViewById(R.id.tv_weather_data);
-
-        // TODO (4) Delete the dummy weather data. You will be getting REAL data from the Internet in this lesson.
-
-        // TODO (3) Delete the for loop that populates the TextView with dummy data
-
-        // TODO (9) Call loadWeatherData to perform the network request to get the weather
+        mErrorTextView =findViewById(R.id.tv_error);
+        mLoadingIndicator =findViewById(R.id.pb_loadingIndicator);
 
     }
 
-    // TODO (8) Create a method that will get the user's preferred location and execute your new AsyncTask and call it loadWeatherData
         public void loadWeatherData(){
             String location = SunshinePreferences.getPreferredWeatherLocation(this);
             new FetchWeatherTask().execute(location);
         }
-    // TODO (5) Create a class that extends AsyncTask to perform network requests
+
+        public void showJsonData(){
+        mErrorTextView.setVisibility(View.INVISIBLE);
+        mWeatherTextView.setVisibility(View.VISIBLE);
+        }
+
+        public void showErrorMessage(){
+            mErrorTextView.setVisibility(View.VISIBLE);
+            mWeatherTextView.setVisibility(View.INVISIBLE);
+
+        }
+
     public class FetchWeatherTask extends AsyncTask<String, Void , String[]>{
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            mLoadingIndicator.setVisibility(View.VISIBLE);
+
+        }
 
         @Override
         protected String[] doInBackground(String... params) {
@@ -69,16 +87,20 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String[] s) {
-            super.onPostExecute(s);
-            if(s.length!=0){
+
+            mLoadingIndicator.setVisibility(View.INVISIBLE);
+            if(s!= null){
+                showJsonData();
                 for (String weatherString : s) {
                     mWeatherTextView.append((weatherString) + "\n\n\n");
                 }
             }
+            else{
+                showErrorMessage();
+            }
         }
     }
-    // TODO (6) Override the doInBackground method to perform your network requests
-    // TODO (7) Override the onPostExecute method to display the results of the network request
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
