@@ -11,27 +11,21 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ForecastAdapterViewHolder> {
+
+    //Initializing
     private String[] mWeatherData;
 
     private Context context;
-    // TODO (3) Create a final private ForecastAdapterOnClickHandler called mClickHandler
 
-    // TODO (1) Add an interface called ForecastAdapterOnClickHandler
-    // TODO (2) Within that interface, define a void method that access a String as a parameter
-
-    // TODO (4) Add a ForecastAdapterOnClickHandler as a parameter to the constructor and store it in mClickHandler
-
-    // TODO (5) Implement OnClickListener in the ForecastAdapterViewHolder class
-    // TODO (6) Override onClick, passing the clicked day's data to mClickHandler via its onClick method
+    //Adapter
     public ForecastAdapter(Context context ){
         this.context = context;
-
     }
 
-    // TODO (24) Override onCreateViewHolder
-    // TODO (25) Within onCreateViewHolder, inflate the list item xml into a view
-    // TODO (26) Within onCreateViewHolder, return a new ForecastAdapterViewHolder
-    //           with the above view passed in as a parameter
+    //  Override onCreateViewHolder
+    //  Within onCreateViewHolder, inflate the list item xml into a view
+    //  Within onCreateViewHolder, return a new ForecastAdapterViewHolder
+    //  with the above view passed in as a parameter
 
 
 
@@ -46,8 +40,8 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Foreca
     }
 
 
-    // TODO (27) Override onBindViewHolder
-    // TODO (28) Set the text of the TextView to the weather for this list item's position
+    // Override onBindViewHolder
+    // Set the text of the TextView to the weather for this list item's position
 
 
     @Override
@@ -79,8 +73,9 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Foreca
     // TODO (21) Using view.findViewById, get a reference to this layout's TextView and save it to mWeatherTextView
 
  public class ForecastAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
+    //initializing the text
     private  TextView mWeatherTextView;
+
      public ForecastAdapterViewHolder( View itemView) {
          super(itemView);
          mWeatherTextView = itemView.findViewById(R.id.tv_weather_data);
@@ -91,8 +86,8 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Foreca
      public void onClick(View view) {
          int adapterPosition = getAdapterPosition();
          String weatherForDay = mWeatherData[adapterPosition];
-         Toast.makeText(view.getContext(),"position"+mWeatherData[adapterPosition] +" "+ weatherForDay,
-                        Toast.LENGTH_LONG).show();
+         Toast.makeText(view.getContext(),"  "+ weatherForDay,
+                        Toast.LENGTH_SHORT).show();
      }
  }
     // TODO (31) Create a setWeatherData method that saves the weatherData to mWeatherData
