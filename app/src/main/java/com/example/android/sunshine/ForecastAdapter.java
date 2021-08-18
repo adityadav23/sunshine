@@ -1,6 +1,7 @@
 package com.example.android.sunshine;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,14 +85,12 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Foreca
 
      @Override
      public void onClick(View view) {
-         int adapterPosition = getAdapterPosition();
-         String weatherForDay = mWeatherData[adapterPosition];
-         Toast.makeText(view.getContext(),"  "+ weatherForDay,
-                        Toast.LENGTH_SHORT).show();
+      Intent intent = new Intent(view.getContext(),DetailActivity.class);
+      view.getContext().startActivity(intent);
      }
  }
-    // TODO (31) Create a setWeatherData method that saves the weatherData to mWeatherData
-    // TODO (32) After you save mWeatherData, call notifyDataSetChanged
+    //  Create a setWeatherData method that saves the weatherData to mWeatherData
+    //  After you save mWeatherData, call notifyDataSetChanged
     public void setWeatherData(String[] weatherData) {
         mWeatherData = weatherData;
         notifyDataSetChanged();
