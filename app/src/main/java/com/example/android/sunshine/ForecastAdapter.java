@@ -65,34 +65,35 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Foreca
     }
 
 
-
-    // Within ForecastAdapterViewHolder ///////////////////////////////////////////////////////////
     // TODO (18) Create a public final TextView variable called mWeatherTextView
 
     // TODO (19) Create a constructor for this class that accepts a View as a parameter
     // TODO (20) Call super(view) within the constructor for ForecastAdapterViewHolder
     // TODO (21) Using view.findViewById, get a reference to this layout's TextView and save it to mWeatherTextView
 
- public class ForecastAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-    //initializing the text
-    private  TextView mWeatherTextView;
+    public class ForecastAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        //initializing the text
+        private  TextView mWeatherTextView;
 
-     public ForecastAdapterViewHolder( View itemView) {
-         super(itemView);
-         mWeatherTextView = itemView.findViewById(R.id.tv_weather_data);
-         itemView.setOnClickListener(this);
-     }
+        public ForecastAdapterViewHolder( View itemView) {
+            super(itemView);
+            mWeatherTextView = itemView.findViewById(R.id.tv_weather_data);
+            itemView.setOnClickListener(this);
+        }
 
-     @Override
-     public void onClick(View view) {
-      Intent intent = new Intent(view.getContext(),DetailActivity.class);
-      view.getContext().startActivity(intent);
-     }
- }
+        @Override
+        public void onClick(View view) {
+            String weatherOfDay = mWeatherData[getAdapterPosition()];
+            Intent intent = new Intent(view.getContext(),DetailActivity.class);
+            //passing weather to the intent
+            intent.putExtra(Intent.EXTRA_TEXT , weatherOfDay);
+            view.getContext().startActivity(intent);
+        }
+    }
     //  Create a setWeatherData method that saves the weatherData to mWeatherData
     //  After you save mWeatherData, call notifyDataSetChanged
     public void setWeatherData(String[] weatherData) {
         mWeatherData = weatherData;
         notifyDataSetChanged();
     }
-   }
+}

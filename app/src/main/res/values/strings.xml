@@ -25,6 +25,7 @@
     <string name="app_name">Sunshine</string>
     <string name="refresh">Refresh</string>
     <string name="error">Error: can;t display data</string>
+    <string name ="action_share">Share weather details</string>
 
 
     <!-- - - - - - - - - - - - - -->
