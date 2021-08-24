@@ -11,17 +11,19 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <!--COMPLETED (4) Configure DetailActivity's up button functionality-->
-
         <activity
-            android:name=".DetailActivity"
-            android:parentActivityName=".MainActivity"
+            android:name=".SettingsActivity"
             android:exported="true"
-
             />
         <activity
+            android:name=".DetailActivity"
+            android:exported="true"
+            android:parentActivityName=".MainActivity" />
+        <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:launchMode="singleTop"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

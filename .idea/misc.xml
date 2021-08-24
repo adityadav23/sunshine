@@ -5,8 +5,9 @@
       <map>
         <entry key="app/src/main/res/layout/activity_detail.xml" value="0.2171875" />
         <entry key="app/src/main/res/layout/activity_forecast.xml" value="0.15" />
+        <entry key="app/src/main/res/layout/activity_settings.xml" value="0.2" />
         <entry key="app/src/main/res/layout/forecast_list_item.xml" value="0.20520833333333333" />
-        <entry key="app/src/main/res/menu/detail.xml" value="0.1" />
+        <entry key="app/src/main/res/menu/detail.xml" value="0.18" />
         <entry key="app/src/main/res/menu/forecast.xml" value="0.20520833333333333" />
       </map>
     </option>

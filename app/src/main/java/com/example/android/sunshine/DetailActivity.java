@@ -1,5 +1,6 @@
 package com.example.android.sunshine;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ShareCompat;
 
@@ -45,8 +46,20 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.detail, menu);
-        MenuItem menuItem = menu.findItem(R.id.action_share);
-        menuItem.setIntent(createShareForecastIntent());
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected( MenuItem item) {
+      int itemSelected = item.getItemId();
+      if(itemSelected== R.id.action_share){
+          setIntent(createShareForecastIntent());
+
+      }else if(itemSelected== R.id.action_details_settings){
+          Intent intent = new Intent(this, SettingsActivity.class);
+          startActivity(intent);
+          return true;
+      }
+        return super.onOptionsItemSelected(item);
     }
 }

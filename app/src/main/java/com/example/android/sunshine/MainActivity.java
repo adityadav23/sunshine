@@ -9,6 +9,7 @@ import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -162,6 +163,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         int itemSelected = item.getItemId();
         if(itemSelected== R.id.action_refresh){
             getSupportLoaderManager().restartLoader(WEATHER_LOADER, null, this);
+            return true;
+        }else if(itemSelected == R.id.action_settings){
+            Intent intent = new Intent(MainActivity.this , SettingsActivity.class);
+            startActivity(intent);
             return true;
         }
 
