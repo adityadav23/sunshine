@@ -144,6 +144,7 @@
     <!-- - - - - - - - - - - - - - -->
     <!--NONE-->
 
+    <string name="action_map">Map Location</string>
 <!-- Preference-->
 
     <string name="location_default_value" translatable="false">Mountain View, CA 94043</string>

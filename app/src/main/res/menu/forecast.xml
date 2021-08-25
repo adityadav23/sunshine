@@ -9,6 +9,11 @@
     <item
         android:id="@+id/action_settings"
         app:showAsAction="never"
-        android:title="settings"
-        android:orderInCategory="100"/>
+        android:title="Settings"
+        android:orderInCategory="2"/>
+    <item
+        android:id="@+id/action_map"
+        android:title="@string/action_map"
+        app:showAsAction="never"
+        android:orderInCategory="1"/>
 </menu>

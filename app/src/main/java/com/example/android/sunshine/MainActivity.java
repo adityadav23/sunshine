@@ -1,5 +1,7 @@
 package com.example.android.sunshine;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,13 +12,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.sunshine.data.SunshinePreferences;
 import com.example.android.sunshine.utilities.NetworkUtils;
@@ -66,20 +71,34 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
 
         //restarting loader
-        getSupportLoaderManager().restartLoader(WEATHER_LOADER, null, this);    }
+        getSupportLoaderManager().restartLoader(WEATHER_LOADER, null, this);
+    }
 
 
 
-        public void showJsonData(){
+    private void openLocationInMap() {
+        // TODO (9) Use preferred location rather than a default location to display in the map
+        String addressString = "1600 Ampitheatre Parkway, CA";
+        Uri geoLocation = Uri.parse("geo:0,0?q=" + addressString);
+
+
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(geoLocation);
+          startActivity(intent);
+
+    }
+
+
+    public void showJsonData(){
         mErrorTextView.setVisibility(View.INVISIBLE);
         mRecyclerView.setVisibility(View.VISIBLE);
-        }
+    }
 
-        public void showErrorMessage(){
-            mErrorTextView.setVisibility(View.VISIBLE);
-            mRecyclerView.setVisibility(View.INVISIBLE);
+    public void showErrorMessage(){
+        mErrorTextView.setVisibility(View.VISIBLE);
+        mRecyclerView.setVisibility(View.INVISIBLE);
 
-        }
+    }
 
 
     @Override
@@ -95,8 +114,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                     deliverResult(mWeatherData);
                 }
                 else{
-                mLoadingIndicator.setVisibility(View.VISIBLE);
-                forceLoad();
+                    mLoadingIndicator.setVisibility(View.VISIBLE);
+                    forceLoad();
                 }
             }
 
@@ -107,20 +126,20 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 URL locationUrl = NetworkUtils.buildUrl(location);
 
                 String[] jsonWeather = null;
-             try {   //convert string to url
-                 String jsonWeatherResponse = NetworkUtils.getResponseFromHttpUrl(locationUrl);
+                try {   //convert string to url
+                    String jsonWeatherResponse = NetworkUtils.getResponseFromHttpUrl(locationUrl);
 
-                  jsonWeather = OpenWeatherJsonUtils
-                         .getSimpleWeatherStringsFromJson(MainActivity.this, jsonWeatherResponse);
-             }catch(IOException e){
-                  e.printStackTrace();
-                  return null;
+                    jsonWeather = OpenWeatherJsonUtils
+                            .getSimpleWeatherStringsFromJson(MainActivity.this, jsonWeatherResponse);
+                }catch(IOException e){
+                    e.printStackTrace();
+                    return null;
                 } catch (JSONException e) {
-                 e.printStackTrace();
-                 return null;
-             }
+                    e.printStackTrace();
+                    return null;
+                }
 
-             return jsonWeather;
+                return jsonWeather;
             }
 
             @Override
@@ -167,6 +186,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         }else if(itemSelected == R.id.action_settings){
             Intent intent = new Intent(MainActivity.this , SettingsActivity.class);
             startActivity(intent);
+            return true;
+        }else if(itemSelected==R.id.action_map){
+            openLocationInMap();
             return true;
         }
 
