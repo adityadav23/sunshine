@@ -165,8 +165,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
             @Override
             public String[] loadInBackground() {
-                String location = SunshinePreferences.getPreferredWeatherLocation(MainActivity.this);
-                URL locationUrl = NetworkUtils.buildUrl(location);
+                URL locationUrl = NetworkUtils.getUrl(MainActivity.this);
 
                 String[] jsonWeather = null;
                 try {   //convert string to url
